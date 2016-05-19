@@ -1,4 +1,4 @@
-# SchoolRecord
+# RecordKeeping
 
 This is a record keeping app for teachers.  It has multiple functionalities such as: 
 
