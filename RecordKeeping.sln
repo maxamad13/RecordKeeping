@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.24720.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RecordKeeping", "RecordKeeping\RecordKeeping.csproj", "{81BA70D3-5726-4609-8630-FA0ABE778588}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RecordKeeping.Tests", "RecordKeeping.Tests\RecordKeeping.Tests.csproj", "{04878E31-21C5-4D21-B619-0DF2962AAB1E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{81BA70D3-5726-4609-8630-FA0ABE778588}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{81BA70D3-5726-4609-8630-FA0ABE778588}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{81BA70D3-5726-4609-8630-FA0ABE778588}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{81BA70D3-5726-4609-8630-FA0ABE778588}.Release|Any CPU.Build.0 = Release|Any CPU
+		{04878E31-21C5-4D21-B619-0DF2962AAB1E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{04878E31-21C5-4D21-B619-0DF2962AAB1E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{04878E31-21C5-4D21-B619-0DF2962AAB1E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{04878E31-21C5-4D21-B619-0DF2962AAB1E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
