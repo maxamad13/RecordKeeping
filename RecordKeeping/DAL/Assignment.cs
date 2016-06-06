@@ -9,5 +9,6 @@ namespace RecordKeeping.DAL
     {
         public int AssignmentId { get; set; }
         public string AssignmentName { get; set; }
+        public ICollection<AssignedToStud>AssignedToStuds { get; set; }
     }
 }

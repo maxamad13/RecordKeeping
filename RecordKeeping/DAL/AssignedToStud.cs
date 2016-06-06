@@ -11,5 +11,7 @@ namespace RecordKeeping.DAL
         public int AssignmentId { get; set; }
         public int StudentId { get; set; }
         public decimal Grade { get; set; }
+        public Student student { get; set; }
+        public Assignment assignmeng { get; set; }
     }
 }
