@@ -1,4 +1,4 @@
-﻿@model IEnumerable<RecordKeeping.DAL.Student>
+﻿@model IEnumerable<RecordKeeping.Models.Student>
 
 @{
     ViewBag.Title = "Index";
@@ -12,7 +12,7 @@
 @using (Html.BeginForm())
 {
  @Html.Editor("SearchBox")
-<input type="submit" value="search" />
+<input type="submit" value="search" class="btn btn-info"/>
 }
 <table class="table">
     <tr>

@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using RecordKeeping.DAL;
+using RecordKeeping.Models;
 
 namespace RecordKeeping.Controllers
 {
@@ -19,6 +20,7 @@ namespace RecordKeeping.Controllers
         {
             return View(db.Students.ToList());
         }
+
 
         // GET: Students/Details/5
         public ActionResult Details(int? id)

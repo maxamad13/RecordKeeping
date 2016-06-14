@@ -1,4 +1,4 @@
-﻿@model RecordKeeping.DAL.Student
+﻿@model RecordKeeping.Models.Student
 
 @{
     ViewBag.Title = "Details";
@@ -40,3 +40,11 @@
     @Html.ActionLink("Edit", "Edit", new { id = Model.StudentId }) |
     @Html.ActionLink("Back to List", "Index")
 </p>
+@{
+    var myChart = new Chart(width: 600, height: 400)
+       .AddTitle("Student")
+       .AddSeries(chartType: "Line",
+          xValue: new[] { "Peter", "Andrew", "Julie", "Mary", "Dave" },
+          yValues: new[] { "2", "6", "4", "5", "3" })
+       .Write();
+}

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace RecordKeeping.DAL
+namespace RecordKeeping.Models
 {
     public class Student
     {
