@@ -9,7 +9,7 @@
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
-@using (Html.BeginForm())
+@using (Html.BeginForm("Search", "Students"))
 {
  @Html.Editor("SearchBox")
 <input type="submit" value="search" class="btn btn-info"/>

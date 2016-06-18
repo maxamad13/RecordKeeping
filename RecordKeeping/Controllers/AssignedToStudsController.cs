@@ -11,117 +11,116 @@ using RecordKeeping.Models;
 
 namespace RecordKeeping.Controllers
 {
-    public class StudentsController : Controller
+    public class AssignedToStudsController : Controller
     {
         private SchoolContext db = new SchoolContext();
-        private SchoolRepository SearchField = new SchoolRepository();
 
-        // GET: Students
+        // GET: AssignedToStuds
         public ActionResult Index()
         {
-            return View(db.Students.ToList());
-        }
-        
-        //Search functionality
-        public ActionResult Search(string SearchBox)
-        {
-            var Search = SearchField.SearchBox(SearchBox).ToList();
-
-            return View("Index", Search);
+            var assignedToStuds = db.AssignedToStuds.Include(a => a.assignmeng).Include(a => a.student);
+            return View(assignedToStuds.ToList());
         }
 
-
-        // GET: Students/Details/5
+        // GET: AssignedToStuds/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Student student = db.Students.Find(id);
-            if (student == null)
+            AssignedToStud assignedToStud = db.AssignedToStuds.Find(id);
+            if (assignedToStud == null)
             {
                 return HttpNotFound();
             }
-            return View(student);
+            return View(assignedToStud);
         }
 
-        // GET: Students/Create
+        // GET: AssignedToStuds/Create
         public ActionResult Create()
         {
+            ViewBag.AssignmentId = new SelectList(db.Assignments, "AssignmentId", "AssignmentName");
+            ViewBag.StudentId = new SelectList(db.Students, "StudentId", "FirstName");
             return View();
         }
 
-        // POST: Students/Create
+        // POST: AssignedToStuds/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "StudentId,FirstName,LastName,BirdthDate")] Student student)
+        public ActionResult Create([Bind(Include = "AssignedToStudId,AssignmentId,StudentId,Grade")] AssignedToStud assignedToStud)
         {
             if (ModelState.IsValid)
             {
-                db.Students.Add(student);
+                db.AssignedToStuds.Add(assignedToStud);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(student);
+            ViewBag.AssignmentId = new SelectList(db.Assignments, "AssignmentId", "AssignmentName", assignedToStud.AssignmentId);
+            ViewBag.StudentId = new SelectList(db.Students, "StudentId", "FirstName", assignedToStud.StudentId);
+            return View(assignedToStud);
         }
 
-        // GET: Students/Edit/5
+        // GET: AssignedToStuds/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Student student = db.Students.Find(id);
-            if (student == null)
+            AssignedToStud assignedToStud = db.AssignedToStuds.Find(id);
+            if (assignedToStud == null)
             {
                 return HttpNotFound();
             }
-            return View(student);
+            ViewBag.AssignmentId = new SelectList(db.Assignments, "AssignmentId", "AssignmentName", assignedToStud.AssignmentId);
+            ViewBag.StudentId = new SelectList(db.Students, "StudentId", "FirstName", assignedToStud.StudentId);
+            return View(assignedToStud);
         }
 
-        // POST: Students/Edit/5
+        // POST: AssignedToStuds/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "StudentId,FirstName,LastName,BirdthDate")] Student student)
+        public ActionResult Edit([Bind(Include = "AssignedToStudId,AssignmentId,StudentId,Grade")] AssignedToStud assignedToStud)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(student).State = EntityState.Modified;
+                db.Entry(assignedToStud).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(student);
+            ViewBag.AssignmentId = new SelectList(db.Assignments, "AssignmentId", "AssignmentName", assignedToStud.AssignmentId);
+            ViewBag.StudentId = new SelectList(db.Students, "StudentId", "FirstName", assignedToStud.StudentId);
+            return View(assignedToStud);
         }
 
-        // GET: Students/Delete/5
+        // GET: AssignedToStuds/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Student student = db.Students.Find(id);
-            if (student == null)
+            AssignedToStud assignedToStud = db.AssignedToStuds.Find(id);
+            if (assignedToStud == null)
             {
                 return HttpNotFound();
             }
-            return View(student);
+            return View(assignedToStud);
         }
 
-        // POST: Students/Delete/5
+        // POST: AssignedToStuds/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Student student = db.Students.Find(id);
-            db.Students.Remove(student);
+            AssignedToStud assignedToStud = db.AssignedToStuds.Find(id);
+            db.AssignedToStuds.Remove(assignedToStud);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

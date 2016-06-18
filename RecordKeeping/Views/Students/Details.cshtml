@@ -36,15 +36,32 @@
 
     </dl>
 </div>
+
+<table class="table">
+    <tr>
+        <th>
+            Assignments
+        </th>
+        <th>
+            Grade
+        </th>        
+    </tr>
+
+    @foreach (var item in Model.AssignToStuds)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.assignmeng.AssignmentName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Grade)
+            </td>
+            
+        </tr>
+    }
+
+</table>
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.StudentId }) |
     @Html.ActionLink("Back to List", "Index")
 </p>
-@{
-    var myChart = new Chart(width: 600, height: 400)
-       .AddTitle("Student")
-       .AddSeries(chartType: "Line",
-          xValue: new[] { "Peter", "Andrew", "Julie", "Mary", "Dave" },
-          yValues: new[] { "2", "6", "4", "5", "3" })
-       .Write();
-}

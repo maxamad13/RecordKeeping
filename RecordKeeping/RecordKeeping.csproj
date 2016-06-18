@@ -204,10 +204,16 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AssignedToStudsController.cs" />
+    <Compile Include="Controllers\AssignmentsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\StudentsController.cs" />
     <Compile Include="DAL\SchoolRepository.cs" />
+    <Compile Include="Migrations\201606142250044_InitialCreate2.cs" />
+    <Compile Include="Migrations\201606142250044_InitialCreate2.Designer.cs">
+      <DependentUpon>201606142250044_InitialCreate2.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\AssignedToStud.cs" />
     <Compile Include="Models\Assignment.cs" />
     <Compile Include="DAL\SchoolContext.cs" />
@@ -299,6 +305,16 @@
     <Content Include="Views\Students\Details.cshtml" />
     <Content Include="Views\Students\Edit.cshtml" />
     <Content Include="Views\Students\Index.cshtml" />
+    <Content Include="Views\Assignments\Create.cshtml" />
+    <Content Include="Views\Assignments\Delete.cshtml" />
+    <Content Include="Views\Assignments\Details.cshtml" />
+    <Content Include="Views\Assignments\Edit.cshtml" />
+    <Content Include="Views\Assignments\Index.cshtml" />
+    <Content Include="Views\AssignedToStuds\Create.cshtml" />
+    <Content Include="Views\AssignedToStuds\Delete.cshtml" />
+    <Content Include="Views\AssignedToStuds\Details.cshtml" />
+    <Content Include="Views\AssignedToStuds\Edit.cshtml" />
+    <Content Include="Views\AssignedToStuds\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -320,6 +336,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201606060110200_InitialCreate1.resx">
       <DependentUpon>201606060110200_InitialCreate1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201606142250044_InitialCreate2.resx">
+      <DependentUpon>201606142250044_InitialCreate2.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
