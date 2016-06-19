@@ -9,9 +9,8 @@ namespace RecordKeeping.DAL
 {
     public class SchoolRepository
     {
-        public List<Object> StudentReport = new List<object>();
         public List<Object> FailingGrade = new List<object>();
-        private SchoolContext db = new SchoolContext();
+       
 
         public SchoolContext context { get; set; }
 
@@ -27,25 +26,27 @@ namespace RecordKeeping.DAL
         }
 
 
-        //Search box for student db
+        //Search box for student context
         public List<Student> SearchBox(string SearchBox )
         {
             //linq statement
-            var students = (from s in db.Students
+            var students = (from s in context.Students
                             where s.FirstName.Contains(SearchBox)
-                            || s.FirstName.Contains(SearchBox)
+                            || s.LastName.Contains(SearchBox)
                             select s).ToList();
             return students;
             
         }
 
         //display report       
-        public void GetReport(int id)
+        public List<object> GetReport(int id)
         {
-           
-            var report = from s in db.Students
-                         join a in db.AssignedToStuds on s.StudentId equals a.StudentId
-                         join o in db.Assignments on a.AssignmentId equals o.AssignmentId
+             List<object> StudentReport = new List<object>();
+
+
+        var report = from s in context.Students
+                         join a in context.AssignedToStuds on s.StudentId equals a.StudentId
+                         join o in context.Assignments on a.AssignmentId equals o.AssignmentId
                          select new {s.StudentId, o.AssignmentName, a.Grade };
 
             foreach (var temp in report)
@@ -55,6 +56,7 @@ namespace RecordKeeping.DAL
                     StudentReport.Add(temp);
                 }
             }
+            return StudentReport;
 
             
         }
@@ -62,9 +64,9 @@ namespace RecordKeeping.DAL
         //Shows students failed particular assignments.
         public void FailingStudents()
         {
-            var report = from s in db.Students
-                         join a in db.AssignedToStuds on s.StudentId equals a.StudentId
-                         join o in db.Assignments on a.AssignmentId equals o.AssignmentId
+            var report = from s in context.Students
+                         join a in context.AssignedToStuds on s.StudentId equals a.StudentId
+                         join o in context.Assignments on a.AssignmentId equals o.AssignmentId
                          select new { s.LastName, o.AssignmentName, a.Grade };
 
             foreach (var temp in report)

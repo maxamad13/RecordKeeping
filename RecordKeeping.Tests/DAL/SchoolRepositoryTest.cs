@@ -48,6 +48,8 @@ namespace RecordKeeping.Tests.DAL
             repo = new SchoolRepository();
             mock_context = new Mock<SchoolContext>();
 
+            assignToStud_data = assignToStud_datasource.AsQueryable();
+
             repo = new SchoolRepository(mock_context.Object); // Injects mocked faked StudnContext
             student_data = student_datasource.AsQueryable(); // Turns List student into something we can query with LINQ
             assignment_data = assignment_datasource.AsQueryable();
@@ -81,6 +83,7 @@ namespace RecordKeeping.Tests.DAL
 
             // Tell our mocked VotrContext to use our fully mocked Datasource. (List<PollTag>)
             mock_context.Setup(m => m.Assignments).Returns(mock_assignment_table.Object);
+
 
             // Telling our fake DbSet to use our datasource like something Queryable
             mock_assignToStud_table.As<IQueryable<AssignedToStud>>().Setup(m => m.GetEnumerator()).Returns(assignToStud_data.GetEnumerator());
@@ -125,17 +128,102 @@ namespace RecordKeeping.Tests.DAL
         {
             //Arrange
             ConnectMocksToDatastore();
-          //  SchoolRepository search = new SchoolRepository();
 
-            //Act
-           // string actual = repo.SearchBox("sharif");
-            //var expected = db.student.
-           // string expected = "sharif";
-            //Assert
-           // Assert.AreEqual(actual, expected);
-           
+           // act
+            List<Student> actual = repo.SearchBox("sharif");
+            
+            List<Student> expected = new List<Student>();
+
+            //assert
+            CollectionAssert.AreEqual(actual, expected);
+
         }
 
-       
+        [TestMethod]
+        public void FindingStudentInList()
+        {
+            //Arrenge
+            ConnectMocksToDatastore();
+
+            Student student = new Student();
+
+            student.FirstName = "mohamed";
+            student.LastName = "sharif";
+
+            student_datasource.Add(student);
+
+            //Act
+            List<Student> actual = repo.SearchBox("mohamed");
+
+            
+
+            List<Student> expected = new List<Student>();
+            expected.Add(student);
+
+            //assert
+
+            CollectionAssert.AreEqual(actual, expected);
+        }
+        [TestMethod]
+        public void FindingListofStudent()
+        {
+            //Arrenge
+            ConnectMocksToDatastore();
+
+            Student student = new Student();
+
+            student.FirstName = "mohamed";
+            student.LastName = "sharif";
+            student_datasource.Add(student);
+
+            //Act
+            List<Student> actual = repo.SearchBox("moh");
+            List<Student> actual1 = repo.SearchBox("moh");
+            List<Student> actual2 = repo.SearchBox("shar");
+            List<Student> actual3 = repo.SearchBox("sh");
+
+
+            List<Student> expected = new List<Student>();
+            expected.Add(student);
+
+            //Assert
+            CollectionAssert.AreEqual(actual, expected);
+            CollectionAssert.AreEqual(actual1, expected);
+            CollectionAssert.AreEqual(actual2, expected);
+            CollectionAssert.AreEqual(actual3, expected);
+
+        }
+
+        [TestMethod]
+        public void GetStudentReport()
+        {
+            //Arrange
+            ConnectMocksToDatastore();
+
+            Student student = new Student();
+            Assignment assignment = new Assignment();
+            AssignedToStud assignedToStud = new AssignedToStud();
+
+            student.StudentId = 1;
+            assignment.AssignmentName = "c.homework";
+            assignedToStud.Grade = 80;
+            student_datasource.Add(student);
+
+            //act
+            
+            List<Object> actual = repo.GetReport(1);
+
+            List<Object> expected = new List<object>();
+           // expected.Add(student.StudentId);
+            //expected.Add(assignment.AssignmentName);
+            //expected.Add(assignedToStud.Grade);
+
+            //assert
+
+             Object.Equals(actual, expected);
+
+
+        }
+
     }
 }
